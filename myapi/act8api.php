@@ -1,11 +1,11 @@
 <?php
-header("Content-Type: application/json"); // sets the content type tp JSON
-$servername = "localhost"; //variable, used to store the db connection details
+header("Content-Type: application/json");
+$servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "hospital";
 
-// Create connection creates the mysli connection
+// Create connection 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
@@ -13,7 +13,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') { //handling GET reqs
+// GET requests
+if ($_SERVER['REQUEST_METHOD'] === 'GET') { 
     if (isset($_GET['department'])) {
         $department = $conn->real_escape_string($_GET['department']);
 
@@ -62,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') { //handling GET reqs
     }
 }
 
-
+// POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
 
